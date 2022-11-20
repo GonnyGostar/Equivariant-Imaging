@@ -12,8 +12,8 @@ University College London
 
 2022
 
-![flexible](https://github.com/edongdongchen/EI/blob/main/images/ct.png)
-![flexible](https://github.com/edongdongchen/EI/blob/main/images/ipt.png)
+![flexible](https://github.com/GonnyGostar/EI/blob/main/images/ct.png)
+![flexible](https://github.com/GonnyGostar/EI/blob/main/images/ipt.png)
 Figure: **Learning to image from only measurements.** Training an imaging network through just measurement consistency (MC) does not significantly improve the reconstruction over the simple pseudo-inverse (<img src="https://render.githubusercontent.com/render/math?math=A^{\dagger}y">). However, by enforcing invariance in the reconstructed image set, equivariant imaging (EI) performs almost as well as a fully supervised network. Top: sparse view CT reconstruction, Bottom: pixel inpainting. PSNR is shown in top right corner of the images.
 
 **EI** is a new `self-supervised`, `end-to-end` and `physics-based` learning framework for inverse problems with theoretical guarantees which leverages simple but fundamental priors about natural signals: `symmetry` and `low-dimensionality`.
@@ -21,8 +21,8 @@ Figure: **Learning to image from only measurements.** Training an imaging networ
 ## Get quickly started
 
 * Please find the [blog post](https://tachella.github.io/2021/04/16/equivariant-imaging-learning-beyond-the-range-space/) for a quick introduction of EI.
-* Please find the core implementation of EI at './ei/closure/ei.py' ([ei.py](https://github.com/edongdongchen/EI/blob/master/ei/closure/ei.py)).
-* Please find the 30 lines code [get_started.py](https://github.com/edongdongchen/EI/blob/master/get_started.py) and the [toy cs example](https://github.com/edongdongchen/EI/blob/main/ei_demo_cs_usps.ipynb) [![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/edongdongchen/EI/blob/main/ei_demo_cs_usps.ipynb)
+* Please find the core implementation of EI at './ei/closure/ei.py' ([ei.py](https://github.com/GonnyGostar/EI/blob/master/ei/closure/ei.py)).
+* Please find the 30 lines code [get_started.py](https://github.com/GonnyGostar/EI/blob/master/get_started.py) and the [toy cs example](https://github.com/GonnyGostar/EI/blob/main/ei_demo_cs_usps.ipynb) [![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GonnyGostar/EI/blob/main/ei_demo_cs_usps.ipynb)
  to get started with EI.
 
 ## Overview
@@ -47,7 +47,7 @@ Key observations:
 - Invariance provides access to implicit operators <img src="https://render.githubusercontent.com/render/math?math=A_g=AT_g"> with potentially different range spaces: <img src="https://render.githubusercontent.com/render/math?math=Ax=AT_gT_g^{\top}x=A_g\tilde{x}"> where <img src="https://render.githubusercontent.com/render/math?math=A_g=AT_g"> and <img src="https://render.githubusercontent.com/render/math?math=\tilde{x}=T_g^{\top}x">. Obviously, <img src="https://render.githubusercontent.com/render/math?math=\tilde{x}"> should also in the signal set.
 - The composition <img src="https://render.githubusercontent.com/render/math?math=f\circ A"> is **equivariant** to the group of transformations <img src="https://render.githubusercontent.com/render/math?math={T_g}">: <img src="https://render.githubusercontent.com/render/math?math=f(AT_g x)=T_g f(Ax)">.
 
-![overview](https://github.com/edongdongchen/EI/blob/main/images/invariance_iccv.png)
+![overview](https://github.com/GonnyGostar/EI/blob/main/images/invariance_iccv.png)
 Figure: **Learning with and without equivariance in a toy 1D signal inpainting task.** The signal set consists of different scaling of a triangular signal. On the left, the dataset does not enjoy any invariance, and hence it is not possible to learn the data distribution in the nullspace of <img src="https://render.githubusercontent.com/render/math?math=A">. In this case, the network can inpaint the signal in an arbitrary way (in green), while achieving zero data consistency loss. On the right, the dataset is shift invariant. The range space of <img src="https://render.githubusercontent.com/render/math?math=A^{\top}"> is shifted via the transformations <img src="https://render.githubusercontent.com/render/math?math=T_g">, and the network inpaints the signal correctly.
 
 **Equivariant Imaging:** to learn <img src="https://render.githubusercontent.com/render/math?math=f"> by using only measurements <img src="https://render.githubusercontent.com/render/math?math=\{y_i\}">, all you need is to:
@@ -62,7 +62,7 @@ Figure: **Learning with and without equivariance in a toy 1D signal inpainting t
 2. calculate  <img src="https://render.githubusercontent.com/render/math?math=x^{(2)}=T_gx^{(1)}"> by transforming  <img src="https://render.githubusercontent.com/render/math?math=x^{(1)}">.
 3. calculate  <img src="https://render.githubusercontent.com/render/math?math=x^{(3)}=f_\theta(Ax^{(2)})"> by reconstructing  <img src="https://render.githubusercontent.com/render/math?math=x^{(2)}">  from its measurement <img src="https://render.githubusercontent.com/render/math?math=Ax^{(2)}">.
 
-![flowchart](https://github.com/edongdongchen/EI/blob/main/images/fig_flowchart.png)
+![flowchart](https://github.com/GonnyGostar/EI/blob/main/images/fig_flowchart.png)
 
 - Train: finally learn the reconstruction function  <img src="https://render.githubusercontent.com/render/math?math=f_\theta">  by solving: <img src="https://render.githubusercontent.com/render/math?math=\arg\min_{\theta}\mathbb{E}_{y,g}"><img src="https://render.githubusercontent.com/render/math?math=\{L(Ax^{(1)}, y)"> + <img src="https://render.githubusercontent.com/render/math?math=\lambda L(x^{(2)}, x^{(3)})\}">
 
